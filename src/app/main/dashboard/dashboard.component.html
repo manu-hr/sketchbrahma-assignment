@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="row mt-2">
+    <div class="col-lg-10 col-md-10 col-sm-12 offset-lg-1 offset-md-1">
+      <div class="lineGraphCard" *ngIf="!incomeReportError">
+        <div class="card">
+          <h5 class="card-title m-2">Annual Earnings - IBM</h5>
+          <div class="card-body m-2">
+            <ngx-charts-line-chart
+              [showXAxisLabel]="showXAxisLabel"
+              [showYAxisLabel]="showYAxisLabel"
+              [xAxis]="xAxis"
+              [yAxis]="yAxis"
+              [xAxisLabel]="xAxisLabelLineChart"
+              [yAxisLabel]="yAxisLabelLineChart"
+              [timeline]="timeline"
+              [results]="multiLinechart"
+              [animations]="animations"
+              (select)="onSelect($event)"
+            >
+            </ngx-charts-line-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="incomeReportError" class="alert alert-danger mt-2">{{incomeReportError}}</div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12">
+      <div class="barChartCard"  *ngIf="!incomeReportError">
+        <div class="card">
+          <h5 class="card-title m-2">Annual Income - IMB</h5>
+          <div class="card-body m-2">
+            <ngx-charts-bar-vertical-stacked
+              [barPadding]="8"
+              [results]="finalAnnualIncomeBarChartData"
+              [gradient]="gradient"
+              [xAxis]="showXAxis"
+              [yAxis]="showYAxis"
+              [legend]="showLegend"
+              [showXAxisLabel]="showXAxisLabel"
+              [showYAxisLabel]="showYAxisLabel"
+              [xAxisLabel]="xAxisLabel"
+              [yAxisLabel]="yAxisLabel"
+              [animations]="animations"
+              (select)="onSelect($event)"
+            >
+            </ngx-charts-bar-vertical-stacked>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12">
+      <div class="card" *ngIf="!incomeReportError">
+        <h5 class="card-title m-2">Quaterly Income - IMB</h5>
+        <div class="card-body m-2 ">
+          <ngx-charts-bar-vertical-stacked
+            [results]="finalquaterlyIncomeBarChart"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [legend]="showLegend"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel"
+            [animations]="animations"
+            (select)="onSelect($event)"
+          >
+          </ngx-charts-bar-vertical-stacked>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="earningReportError" class="alert alert-danger mt-2">{{earningReportError}}</div>
+
+  </div>
+</div>
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#000000"
+  type="ball-elastic-multiple"
+>
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>

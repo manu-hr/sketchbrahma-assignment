@@ -1,0 +1,115 @@
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-6">
+      <div class="form-group">
+        <input
+          type="email"
+          [(ngModel)]="searchQuery"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+          placeholder="Search "
+        />
+        <small id="emailHelp" class="form-text text-muted"
+          >Search Articles with Title, Keywords</small
+        >
+      </div>
+    </div>
+    <div class="col-lg-1">
+      <button type="submit" class="btn btn-primary" (click)="onSearch()">
+        Search
+      </button>
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div
+      class="col-lg-8 col-md-8 col-sm-10"
+      style="border-right: 2px solid white"
+    >
+      <div *ngIf="dataObj">
+        <div *ngFor="let article of dataObj">
+          <div class="mt-2">
+            <div class="card"> 
+              <div class="row">
+                <div class="col-lg-3 col-md-3">
+                  <img
+                    class="m-2"
+                    [src]="article?.multimedia[0]?.url != null ? 'https://www.nytimes.com/'+article?.multimedia[0]?.url : altImageUrl "
+                    alt="Image"
+                    width="200"
+                    height="150"
+                  />
+                </div>
+                <div class="col-lg-8 col-md-8 m-2">
+                  <h6 class="card-title">{{ article?.abstract }}</h6>
+                  <p>{{ article?.lead_paragraph }}</p>
+                  <span>Source : </span
+                  ><a href="{{ article?.web_url }}"> {{ article?.source }}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="articleErrorText" class="alert alert-danger">{{articleErrorText}}</div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-10">
+      <div class="row stories">
+        <div class="col-lg-8">
+          <h6 class="fw-bolder m-2 display-5" style="color: white">
+            Top Stories
+          </h6>
+        </div>
+        <div class="col-lg-1 col-1 mt-4">
+          <select class="browser-default btn btn-primary" [value]="topStroyValue" (change)="onOptionChange($event)">
+            <option *ngFor="let catergory of dropdownOptions">{{catergory}}</option>  
+          </select>
+        </div>
+      </div>
+      <div *ngIf="topStoriesDataObj">
+        <div *ngFor="let article of topStoriesDataObj">
+          <div class="mt-2">
+            <div class="card">
+              <div class="row">
+                <div class="col-lg-5 col-md-5">
+                  <img
+                    class="m-2"
+                    [src]="article.multimedia != null ? article?.multimedia[0]?.url : altImageUrl "
+                    alt="Image"
+                    width="150"
+                    height="100"
+                  />
+                </div>
+                <div class="col-lg-6 col-md-6 m-2">
+                  <h6 class="card-title">{{ article?.title }}</h6>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-10 col-md-10 offset-1">
+                  <p>{{ article?.abstract }}</p>
+                  <a href="{{ article?.url }}"
+                    ><span>{{
+                      "Click Here FOr Full Story" | titlecase
+                    }}</span></a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="topStoriesErrorText" class="alert alert-danger mt-2">{{topStoriesErrorText}}</div>
+    </div>
+  </div>
+</div>
+
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="large"
+  color="#000000"
+  type="ball-elastic-multiple"
+>
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>

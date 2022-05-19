@@ -1,0 +1,12 @@
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~bootstrap/scss/bootstrap';
+
+body{
+    background-color: #082032;
+    background-image: url('./assets/bg.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
